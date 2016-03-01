@@ -58,21 +58,27 @@ public class MainActivity extends AppCompatActivity {
         mPauseButton = (Button)contentView.findViewById(R.id.pauseButton);
         mPauseButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                mPlayer.pause();
+                if (mPlayer != null) {
+                    mPlayer.pause();
+                }
             }
         });
 
         mPlayButton = (Button)contentView.findViewById(R.id.playButton);
         mPlayButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                mPlayer.play(getApplicationContext());
+                if (mPlayer != null) {
+                    mPlayer.play(getApplicationContext());
+                }
             }
         });
 
         mStopButton = (Button)contentView.findViewById(R.id.stopButton);
         mStopButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                mPlayer.stop();
+                if (mPlayer != null) {
+                    mPlayer.stop();
+                }
             }
         });
     }
