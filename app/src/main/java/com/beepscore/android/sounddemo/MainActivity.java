@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
     private Button mPauseButton;
     private Button mPlayButton;
     private Button mStopButton;
-    private SeekBar mSeekBar;
+    private SeekBar mVolumeSeekBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +23,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         View contentView = this.findViewById(android.R.id.content);
 
-        mSeekBar = (SeekBar)contentView.findViewById(R.id.seekBar);
-        mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        mVolumeSeekBar = (SeekBar)contentView.findViewById(R.id.volumeSeekBar);
+        mVolumeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 Log.i(LOG_TAG, "onProgressChanged " + Integer.toString(progress));
