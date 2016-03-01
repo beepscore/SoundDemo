@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final String LOG_TAG = "MainActivity";
+        final String LOG_TAG = MainActivity.class.getSimpleName();
         setContentView(R.layout.activity_main);
         View contentView = this.findViewById(android.R.id.content);
 
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                Log.i(LOG_TAG, "onProgressChanged" + progress);
+                Log.i(LOG_TAG, "onProgressChanged " + Integer.toString(progress));
             }
 
             @Override
