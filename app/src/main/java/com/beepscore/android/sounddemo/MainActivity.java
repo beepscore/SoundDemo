@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private Button mPlayButton;
     private Button mStopButton;
     private final String LOG_TAG = MainActivity.class.getSimpleName();
+    private SeekBar mTimeSeekBar;
     private SeekBar mVolumeSeekBar;
 
     @Override
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
         configureVolume(contentView);
 
+        configureTime(contentView);
+
         configureButtons(contentView);
     }
 
@@ -38,18 +41,49 @@ public class MainActivity extends AppCompatActivity {
         mVolumeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                Log.i(LOG_TAG, "onProgressChanged " + Integer.toString(progress));
+                Log.i(LOG_TAG, "volume " + Integer.toString(progress));
                 mPlayer.setStreamVolume(progress);
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                Log.i(LOG_TAG, "onStartTrackingTouch");
+                Log.i(LOG_TAG, "volume onStartTrackingTouch");
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                Log.i(LOG_TAG, "onStopTrackingTouch");
+                Log.i(LOG_TAG, "volume onStopTrackingTouch");
+            }
+        });
+    }
+
+    private void configureTime(View contentView) {
+        mTimeSeekBar = (SeekBar)contentView.findViewById(R.id.timeSeekBar);
+        mTimeSeekBar.setMax(mPlayer.getDuration());
+        Log.i(LOG_TAG, "duration " + Integer.toString(mPlayer.getDuration()));
+
+        mTimeSeekBar.setProgress(mPlayer.mTimeCurrent);
+
+        mTimeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                Log.i(LOG_TAG, "time " + Integer.toString(progress));
+                if (fromUser) {
+                    Log.i(LOG_TAG, "fromUser time " + Integer.toString(progress));
+                } else {
+                    Log.i(LOG_TAG, "time " + Integer.toString(progress));
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                Log.i(LOG_TAG, "time onStartTrackingTouch");
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                Log.i(LOG_TAG, "time onStopTrackingTouch");
+                mPlayer.seekTo(mTimeSeekBar.getProgress());
             }
         });
     }
