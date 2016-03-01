@@ -48,6 +48,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        configureButtons(contentView);
+    }
+
+    private void configureButtons(View contentView) {
         mPauseButton = (Button)contentView.findViewById(R.id.pauseButton);
         mPauseButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
