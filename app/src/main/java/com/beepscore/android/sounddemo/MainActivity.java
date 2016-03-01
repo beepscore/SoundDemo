@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
         mPlayButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 if (mPlayer != null) {
+                    mPlayer.seekTo(mTimeSeekBar.getProgress());
                     mPlayer.play(getApplicationContext());
                 }
             }
