@@ -13,19 +13,24 @@ public class MainActivity extends AppCompatActivity {
     private Button mPauseButton;
     private Button mPlayButton;
     private Button mStopButton;
+    private final String LOG_TAG = MainActivity.class.getSimpleName();
     private SeekBar mVolumeSeekBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final String LOG_TAG = MainActivity.class.getSimpleName();
-
         mPlayer = new AudioPlayer(this);
 
         setContentView(R.layout.activity_main);
         View contentView = this.findViewById(android.R.id.content);
 
+        configureVolume(contentView);
+
+        configureButtons(contentView);
+    }
+
+    private void configureVolume(View contentView) {
         mVolumeSeekBar = (SeekBar)contentView.findViewById(R.id.volumeSeekBar);
         mVolumeSeekBar.setMax(mPlayer.mVolumeMax);
         mVolumeSeekBar.setProgress(mPlayer.mVolumeCurrent);
@@ -47,8 +52,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.i(LOG_TAG, "onStopTrackingTouch");
             }
         });
-
-        configureButtons(contentView);
     }
 
     private void configureButtons(View contentView) {
