@@ -26,14 +26,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         View contentView = this.findViewById(android.R.id.content);
 
-        configureVolume(contentView);
+        configureVolumeSeekBar(contentView);
 
-        configureTime(contentView);
+        configureTimeSeekBar(contentView);
 
         configureButtons(contentView);
     }
 
-    private void configureVolume(View contentView) {
+    private void configureVolumeSeekBar(View contentView) {
         mVolumeSeekBar = (SeekBar)contentView.findViewById(R.id.volumeSeekBar);
         mVolumeSeekBar.setMax(mPlayer.mVolumeMax);
         mVolumeSeekBar.setProgress(mPlayer.mVolumeCurrent);
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void configureTime(View contentView) {
+    private void configureTimeSeekBar(View contentView) {
         mTimeSeekBar = (SeekBar)contentView.findViewById(R.id.timeSeekBar);
         mTimeSeekBar.setMax(mPlayer.getDuration());
         Log.i(LOG_TAG, "duration " + Integer.toString(mPlayer.getDuration()));
