@@ -9,7 +9,7 @@ import android.widget.SeekBar;
 
 public class MainActivity extends AppCompatActivity {
 
-    private AudioPlayer mPlayer = new AudioPlayer();
+    private AudioPlayer mPlayer;
     private Button mPauseButton;
     private Button mPlayButton;
     private Button mStopButton;
@@ -20,14 +20,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         final String LOG_TAG = MainActivity.class.getSimpleName();
+
+        mPlayer = new AudioPlayer(this);
+
         setContentView(R.layout.activity_main);
         View contentView = this.findViewById(android.R.id.content);
 
         mVolumeSeekBar = (SeekBar)contentView.findViewById(R.id.volumeSeekBar);
+        mVolumeSeekBar.setMax(mPlayer.mVolumeMax);
+        mVolumeSeekBar.setProgress(mPlayer.mVolumeCurrent);
+
         mVolumeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 Log.i(LOG_TAG, "onProgressChanged " + Integer.toString(progress));
+                mPlayer.setStreamVolume(progress);
             }
 
             @Override

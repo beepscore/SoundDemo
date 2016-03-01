@@ -1,6 +1,7 @@
 package com.beepscore.android.sounddemo;
 
 import android.content.Context;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 
 /**
@@ -8,7 +9,16 @@ import android.media.MediaPlayer;
  * https://developer.android.com/reference/android/media/MediaPlayer.html
  */
 public class AudioPlayer {
+    private AudioManager mAudioManager;
     private MediaPlayer mPlayer;
+    int mVolumeMax;
+    int mVolumeCurrent;
+
+    public AudioPlayer(Context context) {
+        mAudioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
+        mVolumeMax = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+        mVolumeCurrent = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+    }
 
     public void stop() {
         if (mPlayer != null) {
@@ -41,4 +51,7 @@ public class AudioPlayer {
         }
     }
 
+    public void setStreamVolume(int volume) {
+        mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, 0);
+    }
 }
