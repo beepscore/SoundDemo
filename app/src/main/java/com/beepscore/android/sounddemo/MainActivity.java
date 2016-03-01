@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class MainActivity extends AppCompatActivity {
 
     private AudioPlayer mPlayer;
@@ -62,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         mTimeSeekBar.setMax(mPlayer.getDuration());
         Log.i(LOG_TAG, "duration " + Integer.toString(mPlayer.getDuration()));
 
-        mTimeSeekBar.setProgress(mPlayer.mTimeCurrent);
+        configureProgressTimer();
 
         mTimeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -86,6 +89,18 @@ public class MainActivity extends AppCompatActivity {
                 mPlayer.seekTo(mTimeSeekBar.getProgress());
             }
         });
+    }
+
+    private void configureProgressTimer() {
+        final int delayMsec = 0;
+        final int periodMsec = 100;
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+            // runnable
+            @Override
+            public void run() {
+                mTimeSeekBar.setProgress(mPlayer.getCurrentPosition());
+            }
+        }, delayMsec, periodMsec);
     }
 
     private void configureButtons(View contentView) {

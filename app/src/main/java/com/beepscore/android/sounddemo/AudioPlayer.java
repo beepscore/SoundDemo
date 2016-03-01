@@ -14,8 +14,6 @@ public class AudioPlayer {
     int mVolumeMax;
     int mVolumeCurrent;
 
-    int mTimeCurrent;
-
     public AudioPlayer(Context context) {
         mAudioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
         mVolumeMax = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
@@ -48,14 +46,20 @@ public class AudioPlayer {
                 }
             });
         }
-
-        mTimeCurrent = mPlayer.getCurrentPosition();
         mPlayer.start();
     }
 
     public void pause() {
         if (mPlayer != null) {
             mPlayer.pause();
+        }
+    }
+
+    public int getCurrentPosition() {
+        if (mPlayer != null) {
+            return mPlayer.getCurrentPosition();
+        } else {
+            return 0;
         }
     }
 
